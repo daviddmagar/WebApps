@@ -11,7 +11,6 @@ var config = {
 firebase.initializeApp(config);
 
 var products = [];
-var categoryArray = [];
 
 
 // use JQuery to call your code after the document.ready event
@@ -21,7 +20,6 @@ $(function () {
         checkPrice(products);
         checkAvailable(products);
         checkRating(products);
-        createCategories();
     });
 
 
@@ -50,16 +48,9 @@ $(function () {
             var availability = book["stock"];
             var price = book["price"];
             var rating = book["rating"];
-            var category = book["genre"];
-            if(!(categoryArray.includes(category))){
-                //alert(category);
-                categoryArray.push(category);
-            }
-
-            
-           // addCategories(category);
-
-
+            var bookHTML1 = $('<h1 id="' + book["id"] + '"></h1>').text(book["name"]);
+            var bookHTML2 = $('<h1 id="' + book["price"] + '"></h1>').text(book["price"]);
+            var bookHTML3 = $('<h1 id="' + book["rating"] + '"></h1>').text(book["rating"]);
 
             var listingHTML = "<h3>" + title + "</h3>\n<p>Price: $" + price + "<br>Rating: " + rating + "<br>Stock: " + availability + "</p>";
 
@@ -76,7 +67,6 @@ $(function () {
         // use JQuery to append the "row" element to the "container" element
         $(".container").append(row);
     });
-    createCategories();
     // end then
 });
 
@@ -255,30 +245,6 @@ function checkPrice(products) {
         // end forEach
     })
     // end click handler
-}
-
-function addCategories(category){
-    if(categoryArray.includes(category)){
-        return null;
-    }
-    else {
-        categoryArray.push(category);
-    }
-}
-
-function createCategories(){
-    
-    //alert(categoryArray.length);
-    categoryArray.forEach(function(genre) {
-        //alert("Hey");
-        var categoryHTML = "<h6>" + genre + "</h6>";
-        divHTML = "<div class=\"col\" id=\"" + genre + "\"></div>"
-            var col = $(divHTML);
-            // append the book to the "col" element
-            col.append(categoryHTML);
-            // append the "col" element to the "row" element
-            $("#category_box").append(col);
-    } );
 }
 
 // end document.read JQuery function
