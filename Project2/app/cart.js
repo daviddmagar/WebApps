@@ -1,0 +1,6 @@
+$(function () {
+
+    $("#purchase").click(function () {
+        
+	});
+});
